@@ -1,0 +1,368 @@
+body
+{
+	line-height: 130%;
+}
+
+
+/* + toc */
+	#toc
+	{
+		float: left;
+		
+		border-right: solid 1px;
+		margin-right: 4em;
+		
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+
+	#toc ul
+	{
+		margin-left: 0;
+		list-style: none; /* using the numbers from LaTeX/XML */
+		
+		/* multi-line precautions */
+		padding-left: 1em;
+		text-indent: -1em;
+		
+		margin-top: 0.1em;
+		margin-bottom: 0.5em;
+	}
+
+	#toc li
+	{
+		margin-bottom: 0.1em;
+	}
+/* - toc */
+
+
+#main
+{
+	float: left;
+	width: 800px;
+	padding-left: 2em;
+	padding-right: 2em;
+	line-height: 130%;
+}
+
+
+/* + par/section */
+	article > section /* chapters */
+	{
+		margin-bottom: 3em;
+	}
+	article section /* everything within chapters */
+	{
+		margin-bottom: 2em;
+	}
+
+
+	.numbered-paragraph
+	{
+		margin-bottom: 1em;
+	}
+
+	.heading-position
+	{
+		margin-right: 1em;
+	}
+	.heading-id
+	{
+		float: right;
+		right: 0;
+	}
+/* - par/section */
+
+
+/* + numbering for numbered paragraphs and numbered bullet points */
+	.par-number, .li-number
+	{
+		margin-left: -2em;
+		float: left;
+		vertical-align: super;
+		font-size: small;
+	}
+
+	.li-number
+	{
+		margin-left: -4em; /* todo: this still causes problems for deeply nested lists */
+		text-align: right;
+	}
+/* - numbering */
+
+
+/* + blocks */
+	.minipage-block /* used to display multiple blocks side by side (like columns) */
+	{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		overflow: auto;
+		width: 100%;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	.minipage-block > .minipage
+	{
+		float: left;
+		margin-right: 2em;
+	}
+	
+	.non-normative-intro, .non-normative-outro
+	{
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+		font-style: italic;
+	}
+
+	.note, .example
+	{
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+		/* In the PDF, it's often inline,
+		 * but it may contain paragraphs and code blocks, lists etc.
+		 */
+		display: inline;
+	}
+	
+	.indented
+	{
+		display: block;
+		padding-top: 0.2em;
+		padding-bottom: 0.2em;
+		padding-left: 4em;
+	}
+/* - blocks */
+
+
+/* + bnfs */
+	.bnf, .bnftab, .bnfkeywordtab
+	{
+		padding-left: 2em;
+		word-spacing: 0.5em;
+		line-height: 150%;
+	}
+	.simplebnf, ul.bnf, ul.bnftab
+	{
+		padding-left: 2em;
+		list-style-type: none;
+		word-spacing: 0.5em;
+		line-height: 150%;
+	}
+
+	.bnf > dt, .bnftab > dt, .simplebnf > dt, .nontermdef 
+	{
+		font-weight: bold;
+		font-style: italic;
+	}
+
+	.bnf > dd, .bnftab > dd, .simplebnf > dd
+	{
+		font-style: italic;
+		padding-left: 2em;
+		text-indent: -2em;
+	}
+
+	.bnf .description, .bnftab .description, .bnfkeywordtab .description, .simplebnf .description
+	{
+		word-spacing: normal;
+		font-style: normal;
+	}
+
+	.bnfkeywordtab > dd
+	{
+		padding-left: 2em;
+		margin: 0;
+	}
+
+	.bnfkeywordtab > dd > table
+	{
+		border: none;
+		margin: 0;
+	}
+	.bnfkeywordtab > dd > table > tbody > tr > td
+	{
+		border: none;
+		width: 4em;
+	}
+/* - bnfs */
+
+
+/* + table, figure */
+	table, figure
+	{
+		margin-left: auto;
+		margin-right: auto;
+		
+		margin-top: 2em;
+		margin-bottom: 2em;
+	}
+
+	table > caption, figcaption
+	{
+		margin-bottom: 1em;
+		font-size: large;
+		text-align: center;
+	}
+
+	thead > tr > td
+	{
+		border: solid 1px;
+		padding: 0.3em;
+		font-weight: bold;
+		background-color: silver;
+	}
+
+	tbody > tr > td
+	{
+		border: solid 1px;
+		padding: 0.3em;
+	}
+/* - table, figure */
+
+
+/* + lists */
+	li
+	{
+		margin-bottom: 0.5em;
+	}
+
+	dt:not(:first-child)
+	{
+		margin-top: 0.5em;
+	}
+	
+	.no-itemMark
+	{
+		list-style-type: none;
+	}
+	.custom-itemMark
+	{
+		list-style-type: none;
+		padding-left: 2em;
+	}
+	.itemMark
+	{
+		margin-left: -2em;
+	}
+/* - lists */
+
+
+/* + code */
+	code.inline, code.keyword
+	{
+		/* todo: maybe restrict this to bnfs */
+		font-style: normal; /* e.g. in bnfs, terminals should not be italic */
+		color: green; /* need to differ from links */
+		font-weight: bold;/* green is rather light */
+	}
+	code.block
+	{
+		display: block;
+		margin-left: 2em;
+	}
+/* - code */
+
+
+/* + inline */
+	/* .nontermdef is defined in the bnf section */
+	
+	.grammarterm, .nonterminal, .term, .placeholder, .doccite, .cvqual
+	{
+		font-style: italic;
+	}
+
+	.defnx
+	{
+		font-style: italic;
+		font-weight: bold;
+	}
+
+	.NTS, .logop
+	{
+		font-variant: small-caps;
+	}
+
+	.opt
+	{
+		vertical-align: sub;
+		font-size: small;
+		font-style: italic;
+	}
+
+	.uniquens
+	{
+		font-style: italic;
+		font-weight: bold;
+	}
+/* - inline */
+
+
+/* + links */
+	a
+	{
+		text-decoration: none;
+	}
+	a:hover
+	{
+		text-decoration: underline;
+	}
+
+	.ref-broken
+	{
+		color: red;
+	}
+/* - links */
+
+
+/* + footnote */
+	.footnote
+	{
+		margin-bottom: 1em;
+		overflow: auto;
+	}
+
+	.footnote-intro
+	{
+		display: block;
+		text-align: right;
+		padding-right: 0.5em;
+		float: left;
+		width: 3.5em;
+	}
+
+	.footnoteText
+	{
+		display: block;
+		float: left;
+		width: calc(100% - 4em);
+	}
+	
+	/* Footnote marks appear in two contexts:
+	 *  - footnote calls (references to footnotes)
+	 *  - footnotes themselves
+	 */
+	.footnoteMark /* within footnote calls */
+	{
+		vertical-align: super;
+		font-size: small;
+	}
+	.footnote > .footnoteMark /* within the footnote itself */
+	{
+		vertical-align: baseline;
+		font-size: medium;
+		margin-right: 0.2em;
+	}
+
+	/* The first footnote paragraph should be within the line
+	 * of the footnote mark and back-references.
+	 */
+	.footnote-par:first-of-type
+	{
+		display: inline;
+	}
+	.footnote-par
+	{
+		margin-top: 0.5em;
+	}
+/* - footnote */
