@@ -29,14 +29,9 @@
 
 
 <xsl:template match="codeblock">
-	<!-- for google prettify -->
-	<xsl:comment>language: lang-cpp</xsl:comment>
-	
-	<pre class="prettyprint">
-		<code class="block">
-			<xsl:apply-templates select="@* | * | text()"/>
-		</code>
-	</pre>
+	<cxx-codeblock>
+		<xsl:apply-templates select="@* | * | text()"/>
+	</cxx-codeblock>
 </xsl:template>
 
 

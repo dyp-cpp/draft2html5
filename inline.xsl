@@ -8,27 +8,7 @@
 
 
 <xsl:template match="ref">
-	<xsl:variable name="own-idref" select="@idref"/>
-	<xsl:element name="a">
-		<xsl:attribute name="href"><xsl:value-of select="concat('#', @idref)"/></xsl:attribute>
-		<xsl:attribute name="class">ref</xsl:attribute>
-		
-		<!--
-			colour broken links differently
-			(broken links are links to sections not contained in the XML document)
-		-->
-		<!-- deactivated for performance reasons -->
-		<!--<xsl:choose>
-			<xsl:when test="//*[@id = $own-idref]">
-				<xsl:attribute name="class">ref</xsl:attribute>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:attribute name="class">ref-broken</xsl:attribute>
-			</xsl:otherwise>
-		</xsl:choose>-->
-		
-		<xsl:value-of select="@idref"/>
-	</xsl:element>
+	<cxx-ref to="@idref"/>
 </xsl:template>
 
 <xsl:template match="@id | @idref">
@@ -86,8 +66,12 @@
 	<cite class="doccite"><xsl:apply-templates select="@* | * | text()"/></cite>
 </xsl:template>
 
-<xsl:template match="placeholder | grammarterm | numconst | nonterminal">
+<xsl:template match="placeholder | numconst">
 	<var class="{name()}"><xsl:apply-templates select="@* | * | text()"/></var>
+</xsl:template>
+
+<xsl:template match="grammarterm | nonterminal">
+	<cxx-term class="{name()}"><xsl:apply-templates select="@* | * | text()"/></cxx-term>
 </xsl:template>
 
 <xsl:template match="defnx">

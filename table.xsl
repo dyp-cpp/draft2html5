@@ -15,16 +15,14 @@
 
 
 <xsl:template match="table">
-	<table id="{@id}">
+	<table id="{@id}" is="cxx-table">
 		<xsl:apply-templates select="*"/>
 	</table>
 </xsl:template>
 
 <xsl:template match="table/caption">
 	<xsl:copy>
-			<xsl:apply-templates select="@*"/>
-			<xsl:value-of select="../@position"/><xsl:text> - </xsl:text>
-			<xsl:apply-templates select="* | text()"/>
+			<xsl:apply-templates select="@* | * | text()"/>
 	</xsl:copy>
 </xsl:template>
 <!-- the continued caption is mainly a feature for visualizations with a limited page size -->

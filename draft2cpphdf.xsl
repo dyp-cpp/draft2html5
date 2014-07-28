@@ -30,25 +30,26 @@
 			
 			<title>A C++ draft formatting test</title>
 			
-			<xsl:if test="$enable-prettify">
-				<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=Cpp">
-				</script>
-			</xsl:if>
-			
-			<link rel="stylesheet" type="text/css" href="cpp-draft.css"/>
+			<script src="bower_components/platform/platform.js"><xsl:comment> </xsl:comment></script>
+			<link rel="import" href="bower_components/cxx-html-doc-framework/framework.html"/>
 		</head>
 		
 		<body>
-			<nav id="toc">
-				<header><h1>Table of contents</h1></header>
-				<xsl:apply-templates mode="toc" select="/"/>
-			</nav>
+			<!-- error check -->
+			<xsl:attribute name="onload">
+<![CDATA[
+document.querySelectorAll('*').array().forEach(
+	function(node) {
+		if (node.checkInvariants) node.checkInvariants();
+	}
+);
+]]>
+			</xsl:attribute>
 			
-			<!-- even though it's not really article-like,
-				 I think the structuring implied by this element makes sense here -->
-			<article id="main">
-				<xsl:apply-templates/>
-			</article>
+			<!-- I forgot why this must not be empty :( -->
+			<cxx-toc><xsl:comment> </xsl:comment></cxx-toc>
+			
+			<xsl:apply-templates/>
 		</body>
 	</html>
 </xsl:template>
@@ -57,7 +58,6 @@
 <!-- contains named templates, needs to be included first -->
 <xsl:include href="number.xsl"/>
 
-<xsl:include href="toc.xsl"/>
 <xsl:include href="section.xsl"/>
 <xsl:include href="par.xsl"/>
 <xsl:include href="blocks.xsl"/>

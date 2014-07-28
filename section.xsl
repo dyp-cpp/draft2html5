@@ -11,30 +11,36 @@
 <xsl:template name="heading">
 	<xsl:param name="heading-node"/>
 	
-	<xsl:element name="{concat('h',1+@level)}">
-		<span class="heading-position"><xsl:value-of select="@position"/></span>
-		<span class="heading-name"><xsl:apply-templates select="$heading-node" mode="heading"/></span>
-		<span class="heading-id">
-			<xsl:text>[</xsl:text><xsl:value-of select="@id"/><xsl:text>]</xsl:text>
-		</span>
-	</xsl:element>
+	<h1>
+		<xsl:apply-templates select="$heading-node" mode="heading"/>
+	</h1>
 </xsl:template>
 
 <xsl:template name="generalized-section">
 	<xsl:param name="heading-node"/>
 	<xsl:param name="intern-template"/>
 	
-	<section id="{@id}" class="{concat('level', @level)}">
-		<xsl:apply-templates select="@*[name() != 'level' and name() != 'position']"/>
+	<xsl:choose>
+		<xsl:when test="@level = 0">
+			<cxx-clause id="{@id}">
+				<xsl:call-template name="heading">
+					<xsl:with-param name="heading-node" select="$heading-node"/>
+				</xsl:call-template>
+				
+				<xsl:apply-templates select="." mode="section-intern"/>
+			</cxx-clause>
+		</xsl:when>
 		
-		<header>
-			<xsl:call-template name="heading">
-				<xsl:with-param name="heading-node" select="$heading-node"/>
-			</xsl:call-template>
-		</header>
-		
-		<xsl:apply-templates select="." mode="section-intern"/>
-	</section>
+		<xsl:otherwise>
+			<cxx-section id="{@id}">
+				<xsl:call-template name="heading">
+					<xsl:with-param name="heading-node" select="$heading-node"/>
+				</xsl:call-template>
+				
+				<xsl:apply-templates select="." mode="section-intern"/>
+			</cxx-section>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 
@@ -56,49 +62,36 @@
 </xsl:template>
 
 
-<!--
-	The definitions in [intro.defs] are implemented using the subsection-counter
-	in LaTeX.
-	They're also within a (proper) section and each form a block of content,
-	so I deem them quite similar to subsections.
--->
 <xsl:template match="definition">
-	<xsl:call-template name="generalized-section">
-		<xsl:with-param name="heading-node" select="./defines"/>
-		<xsl:with-param name="intern-template" select="'definition-intern'"/>
-	</xsl:call-template>
+	<dl is="cxx-definition-section">
+		<xsl:apply-templates select="*"/>
+	</dl>
 </xsl:template>
 
 <xsl:template match="definition" mode="section-intern">
-	<xsl:if test="alt-name">
-		<div class="alt-name">
-			<xsl:text>Also called:</xsl:text>
-			<ul class="alt-name">
-				<xsl:apply-templates select="alt-name"/>
-			</ul>
-		</div>
-	</xsl:if>
+	<xsl:apply-templates select="alt-name"/>
 	
 	<xsl:apply-templates select="explanation"/>
 	
 	<xsl:apply-templates select="*[name() != 'alt-name' and name() != 'explanation'] | text()"/>
 </xsl:template>
 
-<xsl:template match="definition/defines"/>
-<xsl:template match="definition/defines" mode="heading">
-	<xsl:apply-templates select="* | text()"/>
+<xsl:template match="definition/defines">
+	<dt id="{../@id}">
+		<xsl:apply-templates select="@* | * | text()"/>
+	</dt>
 </xsl:template>
 
 <xsl:template match="definition/alt-name">
-	<li>
+	<dt>
 		<xsl:apply-templates select="@* | * | text()"/>
-	</li>
+	</dt>
 </xsl:template>
 
 <xsl:template match="definition/explanation">
-	<div class="explanation"><!-- todo: might be a <p>? -->
+	<dd>
 		<xsl:apply-templates select="@* | * | text()"/>
-	</div>
+	</dd>
 </xsl:template>
 
 <xsl:template match="definition/explanation/br">

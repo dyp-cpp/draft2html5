@@ -7,55 +7,19 @@
 	exclude-result-prefixes="lxir mathml">
 
 
+<!-- todo: doesn't support multiple calls to the same footnote? -->
 <xsl:template match="footnoteCall">
-	<a>
-		<xsl:attribute name="href">
-			<xsl:value-of select="concat('#', ./@idref)"/>
-		</xsl:attribute>
-		<xsl:attribute name="class">footnoteMark</xsl:attribute>
-		
-		<xsl:apply-templates select="@* | *"/>
-	</a>
-</xsl:template>
-
-<xsl:template match="footnoteCall/@idref"/>
-
-<xsl:template match="footnoteCall/footnoteMark">
-	<xsl:apply-templates select="@* | * | text()"/>
-</xsl:template>
-
-
-<xsl:template match="footnotelist">
-	<section class="footnotelist">
-		<header><h1>Footnotes</h1></header>
-		<xsl:apply-templates select="@* | * | text()"/>
-	</section>
-</xsl:template>
-
-<xsl:template match="footnote">
-	<div class="footnote"><!-- a footnote can contain multiple paragraphs -->
-		<xsl:apply-templates select="@*"/>
-		
-		<div class="footnote-intro"><!-- same problem as above -->
-			<xsl:apply-templates select="footnoteMark"/>
-			<xsl:apply-templates select="footnoteBackref"/>
-		</div>
-		
-		<xsl:apply-templates select="footnoteText"/>
-	</div>
-</xsl:template>
-
-<xsl:template match="footnote/footnoteMark">
-	<span class="footnoteMark"><xsl:apply-templates select="@* | * | text()"/></span>
-</xsl:template>
-
-<xsl:template match="footnoteBackref">
-	<a href="{concat('#', @idref)}" class="footnoteBackref">^</a>
+	<xsl:variable name="idref" select="@idref"/>
+	<cxx-footnote>
+		<xsl:apply-templates select="/document/footnotelist/footnote[@id = $idref]/footnoteText/*"/>
+	</cxx-footnote>
 </xsl:template>
 
 <xsl:template match="footnoteText">
-	<div class="footnoteText"><xsl:apply-templates select="@* | * | text()"/></div>
+	<xsl:apply-templates select="*"/>
 </xsl:template>
+
+<xsl:template match="footnotelist"/>
 
 
 </xsl:stylesheet>
