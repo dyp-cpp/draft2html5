@@ -36,6 +36,10 @@
 			</xsl:if>
 			
 			<link rel="stylesheet" type="text/css" href="cpp-draft.css"/>
+			<script src="so_quote.js"> </script>
+			<script>
+			function on_quote_button_click(sender) { oqbc(sender); }
+			</script>
 		</head>
 		
 		<body>
@@ -49,6 +53,22 @@
 			<article id="main">
 				<xsl:apply-templates/>
 			</article>
+			
+			<div id="tools" style="position: fixed; right: 0; padding: 2em;">
+				<button type="button" onclick="on_quote_button_click(this);" style="font-size: large;">quote</button>
+			</div>
+			
+			<div id="quote_result" style="display: none; z-index: 1001; /* magic number? */">
+				<div id="quote_result_overlay" style="position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; opacity: 0.5;"></div>
+				<div id="quote_result_window" style="position: fixed; top: 25%; left: 25%; width: 50%; height: 50%; background-color: white; opacity: 1.0;">
+					<div style="padding: 0.5em; height: 1.5em; background-color: SteelBlue; cursor: move;" id="quote_result_window_header">
+						<header>quote results <span style="float: right;"><button onclick="on_quote_exit(this);">close</button></span></header>
+					</div>
+					<div style="padding: 0.5em; height: calc(100% - 2em); background-color: white;">
+						<textarea id="quote_result_text" readonly="readonly" style="position: relative; width: 100%; height: 100%;">[empty]</textarea>
+					</div>
+				</div>
+			</div>
 		</body>
 	</html>
 </xsl:template>

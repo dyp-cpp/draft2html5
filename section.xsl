@@ -12,10 +12,10 @@
 	<xsl:param name="heading-node"/>
 	
 	<xsl:element name="{concat('h',1+@level)}">
-		<span class="heading-position"><xsl:value-of select="@position"/></span>
+		<span class="heading-position"><xsl:value-of select="@position"/><xsl:text> </xsl:text></span>
 		<span class="heading-name"><xsl:apply-templates select="$heading-node" mode="heading"/></span>
 		<span class="heading-id">
-			<xsl:text>[</xsl:text><xsl:value-of select="@id"/><xsl:text>]</xsl:text>
+			<xsl:text> [</xsl:text><xsl:value-of select="@id"/><xsl:text>]</xsl:text>
 		</span>
 	</xsl:element>
 </xsl:template>
