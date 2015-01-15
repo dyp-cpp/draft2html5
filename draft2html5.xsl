@@ -32,11 +32,12 @@
 			
 			<xsl:if test="$enable-prettify">
 				<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=Cpp">
+				<xsl:comment> </xsl:comment>
 				</script>
 			</xsl:if>
 			
 			<link rel="stylesheet" type="text/css" href="cpp-draft.css"/>
-			<script src="so_quote.js"> </script>
+			<script src="so_quote.js"><xsl:comment> </xsl:comment></script>
 			<script>
 			function on_quote_button_click(sender) { oqbc(sender); }
 			</script>
