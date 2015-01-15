@@ -75,18 +75,22 @@ body
 
 
 /* + numbering for numbered paragraphs and numbered bullet points */
-	.par-number, .li-number
+	.par-number
 	{
 		margin-left: -2em;
 		float: left;
+	}
+	
+	.par-number, .li-number
+	{
 		vertical-align: super;
 		font-size: small;
 	}
-
+	
 	.li-number
 	{
-		margin-left: -4em; /* todo: this still causes problems for deeply nested lists */
-		text-align: right;
+		position: absolute;
+		right: calc(100% + 1.5em);
 	}
 /* - numbering */
 
@@ -225,6 +229,7 @@ body
 	li
 	{
 		margin-bottom: 0.5em;
+		position: relative; /* required for li-number */
 	}
 
 	dt:not(:first-child)
