@@ -581,7 +581,7 @@ traversers.basic_traverser = function()
 				{
 					if(has_css_class(n, "inline"))
 					{
-						f.print(" `"+n.innerText+"` ", c);
+						f.print(" `"+n.textContent+"` ", c);
 					}else
 					{
 						f.print("\n", c);
