@@ -7,13 +7,16 @@ body
 /* + toc */
 	#toc
 	{
-		float: left;
-		
 		border-right: solid 1px;
 		margin-right: 4em;
 		
 		padding-left: 1em;
 		padding-right: 1em;
+		
+		position: fixed;
+		width: 20em;
+		height: 100%;
+		overflow: scroll;
 	}
 
 	#toc ul
@@ -38,8 +41,8 @@ body
 
 #main
 {
-	float: left;
-	width: 800px;
+	width: 55em;
+	margin-left: 25em; /* make space for TOC */
 	padding-left: 2em;
 	padding-right: 2em;
 	line-height: 130%;
