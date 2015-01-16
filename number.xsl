@@ -36,12 +36,12 @@
 	<xsl:param name="class"/>
 	<xsl:variable name="is-li" select="name(.) = 'item'"/>
 	
-	<span class="{$class}">
+	<a class="{$class}" href="{concat('#', ancestor::*[@id][1]/@id, '/', @number)}">
 		<xsl:if test="$is-li"><xsl:text>(</xsl:text></xsl:if>
 		<xsl:value-of select="@number"/>
 		<xsl:if test="$is-li"><xsl:text>)</xsl:text></xsl:if>
 		<xsl:text> </xsl:text><!-- the space allows better text copying and display w/o CSS -->
-	</span>
+	</a>
 </xsl:template>
 
 
