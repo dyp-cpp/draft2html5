@@ -55,7 +55,7 @@
 				<xsl:apply-templates/>
 			</article>
 			
-			<div id="tools" style="position: fixed; right: 0; padding: 2em;">
+			<div id="tools" style="position: fixed; right: 0; top: 0; padding: 2em;">
 				<button type="button" onclick="on_quote_button_click(this);" style="font-size: large;">quote</button>
 			</div>
 			
