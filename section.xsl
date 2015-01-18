@@ -16,7 +16,7 @@
 			<span class="heading-position"><xsl:value-of select="@position"/></span>
 			<span class="heading-name"><xsl:apply-templates select="$heading-node" mode="heading"/></span>
 			<span class="heading-id">
-				<xsl:text>[</xsl:text><xsl:value-of select="@id"/><xsl:text>]</xsl:text>
+				<xsl:text> [</xsl:text><xsl:value-of select="@id"/><xsl:text>]</xsl:text>
 			</span>
 		</a>
 	</xsl:element>
